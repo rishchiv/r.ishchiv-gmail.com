@@ -1,0 +1,13 @@
+<form [formGroup]="postForm" (ngSubmit)="createPost()" novalidate>
+  <div class="form-group">
+    <label for="post-title">Post title</label>
+    <input type="text" id="post-title" class="form-control" formControlName="title" placeholder="Enter title">
+    <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
+  </div>
+  <div class="form-group">
+    <label for="post-description">Post description</label>
+    <textarea type="text" class="form-control" id="post-description" formControlName="body"
+      placeholder="Enter description"></textarea>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
