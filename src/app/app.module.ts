@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
+import { DeviceDetectorModule, DeviceDetectorService } from 'ngx-device-detector';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -27,8 +28,9 @@ import { ToastsComponent } from './toasts/toasts.component';
     FormsModule,
     ReactiveFormsModule,
     NgbModule,
+    DeviceDetectorModule.forRoot()
   ],
-  providers: [],
+  providers: [DeviceDetectorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

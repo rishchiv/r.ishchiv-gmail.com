@@ -3,6 +3,7 @@ import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { IUser } from 'src/app/interfaces/user.interface';
 import { UserService } from 'src/app/services/user.service';
@@ -24,6 +25,7 @@ export class UsersComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private modalService: NgbModal,
     private userService: UserService,
+    public deviceService: DeviceDetectorService,
   ) {
     this.route.params.pipe(takeUntil(this.destroy)).subscribe(params => {
       const { id } = params;

@@ -1,19 +1,37 @@
 <div class="row">
-  <header class="col-12 bg-light d-flex align-items-center pt-4 pb-md-4">
+  <header class="col-12 bg-light d-flex align-items-center pt-md-4 pb-md-4 pt-xs-2 pb-xs-2">
     <h1 class="mr-auto mr-md-none">Posts</h1>
     <button (click)="openCreatePost()" type="button" class="btn btn-primary">Create post</button>
   </header>
   <section class="col-12 pt-3">
-    <div class="list-group">
-      <div *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div class="d-flex w-100 justify-content-between">
-          <h5 class="mb-1" (click)="openDetails(post)">{{post.title}}</h5>
+
+    <ng-template #mobile>
+      <div class="card mb-4" *ngFor="let post of posts">
+        <div class="card-body">
+          <h5 class="card-title" (click)="openDetails(post)">{{post.title}}</h5>
+          <p class="mb-1">
+            {{post.body | slice:0:50}}...
+          </p>
+          <small routerLink="/users/{{post.user.id}}">Author: {{ post.user.name }}</small>
         </div>
-        <p class="mb-1">
-          {{post.body | slice:0:50}}...
-        </p>
-        <small routerLink="/users/{{post.user.id}}">Author: {{ post.user.name }}</small>
       </div>
-    </div>
+    </ng-template>
+
+    <ng-template #desktop>
+      <div class="list-group">
+        <div *ngFor="let post of posts" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1" (click)="openDetails(post)">{{post.title}}</h5>
+          </div>
+          <p class="mb-1">
+            {{post.body | slice:0:50}}...
+          </p>
+          <small routerLink="/users/{{post.user.id}}">Author: {{ post.user.name }}</small>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="deviceService.isMobile() ? mobile : desktop"></ng-container>
+
   </section>
 </div>

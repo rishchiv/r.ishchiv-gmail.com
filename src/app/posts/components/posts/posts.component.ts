@@ -8,6 +8,7 @@ import { PostsService } from '../../services/posts.service';
 import { UserService } from 'src/app/services/user.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CreatePostComponent } from '../create-post/create-post.component';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-posts',
@@ -21,6 +22,7 @@ export class PostsComponent implements OnInit {
     private modalService: NgbModal,
     private postService: PostsService,
     private userService: UserService,
+    public deviceService: DeviceDetectorService,
   ) { }
 
   ngOnInit(): void {

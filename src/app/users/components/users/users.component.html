@@ -1,23 +1,44 @@
 <div class="row">
-  <header class="col-12 bg-light pt-4 pb-md-4 px-4 px-lg-5 d-flex d-md-block align-items-center title">
-    <h1 class="mb-4 mr-auto mr-md-none">Users</h1>
+  <header class="col-12 bg-light d-flex align-items-center pt-md-4 pb-md-4 pt-xs-2 pb-xs-2">
+    <h1 class="mr-auto">Users</h1>
   </header>
   <section class="col-12 pt-3">
-    <div class="list-group">
-      <div *ngFor="let user of users" class="list-group-item list-group-item-action flex-column align-items-start">
-        <div (click)="detailInfo(user)" class="flex-column w-100 justify-content-between border-bottom mb-3">
-          <h5>{{user.name}}</h5>
+
+    <ng-template #mobile>
+      <div class="card mb-4" *ngFor="let user of users">
+        <div class="card-body">
+          <h5 class="card-title">{{user.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{user.username}}</h6>
           <p class="mb-1">
-            <span>username: </span>{{user.username}}
+            <span>email: </span>{{user.email}}
+          </p>
+          <p class="mb-1">
+            <span>company name: </span>{{user.company.name}}
           </p>
         </div>
-        <p class="mb-1">
-          <span>email: </span>{{user.email}}
-        </p>
-        <p class="mb-1">
-          <span>company name: </span>{{user.company.name}}
-        </p>
       </div>
-    </div>
+    </ng-template>
+
+    <ng-template #desktop>
+      <div class="list-group">
+        <div *ngFor="let user of users" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div (click)="detailInfo(user)" class="flex-column w-100 justify-content-between border-bottom mb-3">
+            <h5>{{user.name}}</h5>
+            <p class="mb-1">
+              <span>username: </span>{{user.username}}
+            </p>
+          </div>
+          <p class="mb-1">
+            <span>email: </span>{{user.email}}
+          </p>
+          <p class="mb-1">
+            <span>company name: </span>{{user.company.name}}
+          </p>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet="deviceService.isMobile() ? mobile : desktop"></ng-container>
+
   </section>
 </div>
