@@ -3,22 +3,22 @@ import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs';
 
-import { API_URL } from '../../constants';
+import { API_URL } from '../constants';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PostsService {
+export class UserService {
 
-  private SERVICE_URL = `${API_URL}/posts`;
+  private SERVICE_URL = `${API_URL}/users`;
 
   constructor(private http: HttpClient) { }
 
-  public getPosts(): Observable<{}> {
+  getAll(): Observable<{}> {
     return this.http.get(this.SERVICE_URL);
   }
 
-  public createPost(post: {}): Observable<{}> {
-    return this.http.post(this.SERVICE_URL, post);
+  getUserById(id: number): Observable<{}> {
+    return this.http.get(`this.SERVICE_URL/${id}`);
   }
 }

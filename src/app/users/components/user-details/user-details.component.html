@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h4 class="modal-title">User details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="flex-column w-100 justify-content-between border-bottom mb-3">
+    <h5>{{user.name}}</h5>
+    <p class="mb-1">
+      <span>username: </span>{{user.username}}
+    </p>
+  </div>
+  <p class="mb-1">
+    <span>email: </span>{{user.email}}
+  </p>
+  <p class="mb-1">
+    <span>company name: </span>{{user.company.name}}
+  </p>
+  <p>
+    <span>location: </span>{{user.address.city}}, {{user.address.street}} {{user.address.suite}}
+  </p>
+  <!-- <p><span>phone</span>{{user.phone}}</p> -->
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+</div>

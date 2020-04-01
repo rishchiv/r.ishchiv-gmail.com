@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { FormGroup, Validators } from '@angular/forms';
 
 import { PostsService } from '../../services/posts.service';
+import { FormService } from 'src/app/services/form.service';
 
 @Component({
   selector: 'app-create-post',
@@ -13,14 +15,15 @@ export class CreatePostComponent implements OnInit {
   public postForm: FormGroup;
 
   constructor(
-    private fb: FormBuilder,
+    public formService: FormService,
     private postService: PostsService,
+    public activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit(): void {
-    this.postForm = this.fb.group({
-      title: new FormControl('', Validators.required),
-      body: new FormControl('', Validators.required),
+    this.postForm = this.formService.createForm({
+      title: ['', Validators.required],
+      body: ['', Validators.required]
     });
   }
 
