@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { UserService } from 'src/app/services/user.service';
 import { IUser } from 'src/app/interfaces/user.interface';
+import { UserService } from 'src/app/services/user.service';
 import { UserDetailsComponent } from '../user-details/user-details.component';
 
 @Component({
@@ -10,14 +13,32 @@ import { UserDetailsComponent } from '../user-details/user-details.component';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnInit {
+export class UsersComponent implements OnInit, OnDestroy {
 
   public users: [IUser];
+  private destroy = new Subject<any>();
+  private modalRef = null;
 
   constructor(
+    private router: Router,
+    private route: ActivatedRoute,
     private modalService: NgbModal,
     private userService: UserService,
-  ) { }
+  ) {
+    this.route.params.pipe(takeUntil(this.destroy)).subscribe(params => {
+      const { id } = params;
+      if (id) {
+        this.userService.getUserById(params.id).subscribe((res: any) => {
+          this.detailInfo(res);
+          this.modalRef.result.then(() => {
+            this.router.navigateByUrl('/users');
+          }, () => {
+            this.router.navigateByUrl('/users');
+          });
+        })
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.userService.getAll().subscribe((res: any) => {
@@ -26,7 +47,11 @@ export class UsersComponent implements OnInit {
   }
 
   detailInfo(user: IUser) {
-    const modalRef = this.modalService.open(UserDetailsComponent);
-    modalRef.componentInstance.user = user;
+    this.modalRef = this.modalService.open(UserDetailsComponent);
+    this.modalRef.componentInstance.user = user;
+  }
+
+  ngOnDestroy() {
+    this.destroy.next();
   }
 }
