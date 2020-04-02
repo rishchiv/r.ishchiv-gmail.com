@@ -14,7 +14,7 @@ export class PostsService {
   constructor(private http: HttpClient) { }
 
   public getPosts() {
-    return this.http.get(this.SERVICE_URL);
+    return this.http.get<IPost[]>(this.SERVICE_URL);
   }
 
   public createPost(post: IPost) {

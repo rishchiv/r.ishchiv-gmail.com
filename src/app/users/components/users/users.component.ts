@@ -16,7 +16,7 @@ import { UserDetailsComponent } from '../user-details/user-details.component';
 })
 export class UsersComponent implements OnInit, OnDestroy {
 
-  public users: [IUser];
+  public users: IUser[];
   private destroy = new Subject<any>();
   private modalRef = null;
 
@@ -26,11 +26,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     private modalService: NgbModal,
     private userService: UserService,
     public deviceService: DeviceDetectorService,
-  ) {
+  ) { }
+
+  ngOnInit(): void {
+    this.userService.getAll().subscribe(res => {
+      this.users = res;
+    })
     this.route.params.pipe(takeUntil(this.destroy)).subscribe(params => {
       const { id } = params;
       if (id) {
-        this.userService.getUserById(params.id).subscribe((res: any) => {
+        this.userService.getUserById(params.id).subscribe(res => {
           this.detailInfo(res);
           this.modalRef.result.then(() => {
             this.router.navigateByUrl('/users');
@@ -40,12 +45,6 @@ export class UsersComponent implements OnInit, OnDestroy {
         })
       }
     });
-  }
-
-  ngOnInit(): void {
-    this.userService.getAll().subscribe((res: any) => {
-      this.users = res;
-    })
   }
 
   detailInfo(user: IUser) {

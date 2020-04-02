@@ -29,7 +29,7 @@ export class PostsComponent implements OnInit {
     forkJoin(
       this.userService.getAll(),
       this.postService.getPosts(),
-    ).subscribe((res: any) => {
+    ).subscribe(res => {
       const [users, posts] = res;
 
       this.posts = posts.map(post => {
@@ -48,7 +48,7 @@ export class PostsComponent implements OnInit {
   }
 
   openCreatePost() {
-    const modalRef = this.modalService.open(CreatePostComponent);
+    this.modalService.open(CreatePostComponent);
   }
 
 }

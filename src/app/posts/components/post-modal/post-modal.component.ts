@@ -1,4 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPost } from 'src/app/interfaces/post.interface';
 
@@ -7,13 +8,17 @@ import { IPost } from 'src/app/interfaces/post.interface';
   templateUrl: './post-modal.component.html',
   styleUrls: ['./post-modal.component.scss']
 })
-export class PostModalComponent implements OnInit {
+export class PostModalComponent {
 
   @Input() post: IPost;
 
-  constructor(public activeModal: NgbActiveModal) { }
+  constructor(
+    private router: Router,
+    public activeModal: NgbActiveModal
+  ) { }
 
-  ngOnInit(): void {
+  navigateToUser() {
+    this.activeModal.close();
+    this.router.navigate(['/users', this.post.user.id]);
   }
-
 }

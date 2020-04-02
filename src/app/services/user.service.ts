@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { API_URL } from '../constants';
+import { IUser } from '../interfaces/user.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,10 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getAll() {
-    return this.http.get(this.SERVICE_URL);
+    return this.http.get<IUser[]>(this.SERVICE_URL);
   }
 
-  getUserById(id: number) {
-    return this.http.get(`${this.SERVICE_URL}/${id}`);
+  getUserById(id: string) {
+    return this.http.get<IUser>(`${this.SERVICE_URL}/${id}`);
   }
 }
