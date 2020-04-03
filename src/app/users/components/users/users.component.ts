@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -17,7 +17,7 @@ import { UserDetailsComponent } from '../user-details/user-details.component';
 export class UsersComponent implements OnInit, OnDestroy {
 
   public users: IUser[];
-  private destroy = new Subject<any>();
+  private destroy = new Subject<Params>();
   private modalRef = null;
 
   constructor(

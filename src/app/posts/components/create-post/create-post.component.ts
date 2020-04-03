@@ -16,9 +16,9 @@ export class CreatePostComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
+    public activeModal: NgbActiveModal,
     private toastService: ToastService,
     private postService: PostsService,
-    public activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit(): void {
