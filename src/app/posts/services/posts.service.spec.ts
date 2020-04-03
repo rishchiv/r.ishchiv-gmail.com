@@ -1,6 +1,6 @@
+import { of } from 'rxjs';
 import { PostsService } from './posts.service';
 import { IPost } from 'src/app/interfaces/post.interface';
-import { of } from 'rxjs';
 
 describe('PostsService', () => {
   let httpClientSpy: { get: jasmine.Spy, post: jasmine.Spy };
@@ -11,7 +11,7 @@ describe('PostsService', () => {
     service = new PostsService(<any>httpClientSpy);
   });
 
-  it('should return expected posts (HttpClient called once)', () => {
+  it('should return expected users (HttpClient called once)', () => {
     const expectedPosts: IPost[] =
       [{
         id: 1,
@@ -34,7 +34,7 @@ describe('PostsService', () => {
     expect(httpClientSpy.get.calls.count()).toBe(1, 'one call');
   });
 
-  it('should send post (HttpClient called once)', () => {
+  it('should create post (HttpClient called once)', () => {
     const post: IPost = {
       id: 1,
       userId: 2,
