@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { IUser } from 'src/app/interfaces/user.interface';
 
 @Component({
@@ -7,13 +8,10 @@ import { IUser } from 'src/app/interfaces/user.interface';
   templateUrl: './user-details.component.html',
   styleUrls: ['./user-details.component.scss']
 })
-export class UserDetailsComponent implements OnInit {
+export class UserDetailsComponent {
 
   @Input() user: IUser;
 
   constructor(public activeModal: NgbActiveModal) { }
-
-  ngOnInit(): void {
-  }
 
 }

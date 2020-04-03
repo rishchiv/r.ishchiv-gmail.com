@@ -3,12 +3,12 @@ import { forkJoin } from 'rxjs';
 
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DeviceDetectorService } from 'ngx-device-detector';
 
 import { PostsService } from '../../services/posts.service';
 import { UserService } from 'src/app/services/user.service';
 import { PostModalComponent } from '../post-modal/post-modal.component';
 import { CreatePostComponent } from '../create-post/create-post.component';
-import { DeviceDetectorService } from 'ngx-device-detector';
 
 @Component({
   selector: 'app-posts',

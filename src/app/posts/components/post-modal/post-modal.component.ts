@@ -1,6 +1,7 @@
 import { Router } from '@angular/router';
 import { Component, Input } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { IPost } from 'src/app/interfaces/post.interface';
 
 @Component({

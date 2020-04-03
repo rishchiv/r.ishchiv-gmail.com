@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 
 import { PostsService } from '../../services/posts.service';
-import { FormService } from 'src/app/services/form.service';
 import { ToastService } from 'src/app/services/toast.service';
 
 @Component({
@@ -16,14 +15,14 @@ export class CreatePostComponent implements OnInit {
   public postForm: FormGroup;
 
   constructor(
-    public formService: FormService,
+    private fb: FormBuilder,
     private toastService: ToastService,
     private postService: PostsService,
     public activeModal: NgbActiveModal,
   ) { }
 
   ngOnInit(): void {
-    this.postForm = this.formService.createForm({
+    this.postForm = this.fb.group({
       title: ['', Validators.required],
       body: ['', Validators.required]
     });
@@ -55,5 +54,10 @@ export class CreatePostComponent implements OnInit {
       classname: 'bg-danger text-light',
       delay: 1000,
     });
+  }
+
+  public invalidFormField(field: string) {
+    return this.postForm.get(field).invalid &&
+      (this.postForm.get(field).dirty || this.postForm.get(field).touched);
   }
 }

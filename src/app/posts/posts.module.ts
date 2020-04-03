@@ -12,12 +12,13 @@ import { CreatePostComponent } from './components/create-post/create-post.compon
   declarations: [
     PostsComponent,
     PostModalComponent,
-    CreatePostComponent
+    CreatePostComponent,
   ],
   imports: [
     CommonModule,
     PostsRoutingModule,
-    FormsModule, ReactiveFormsModule
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class PostsModule { }
